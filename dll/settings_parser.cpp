@@ -366,6 +366,23 @@ static void load_overlay_appearance(class Settings *settings_client, class Setti
     }
 }
 
+// overlay::button
+static void load_overlay_button(class Settings *settings_client, class Settings *settings_server, class Local_Storage *local_storage)
+{
+    settings_client->overlay_button->disable_show_achievements = ini.GetBoolValue("overlay::button", "disable_show_achievements", settings_client->overlay_button->disable_show_achievements);
+    settings_server->overlay_button->disable_show_achievements = ini.GetBoolValue("overlay::button", "disable_show_achievements", settings_client->overlay_button->disable_show_achievements);
+    
+    settings_client->overlay_button->disable_settings = ini.GetBoolValue("overlay::button", "disable_settings", settings_client->overlay_button->disable_settings);
+    settings_server->overlay_button->disable_settings = ini.GetBoolValue("overlay::button", "disable_settings", settings_client->overlay_button->disable_settings);
+    
+    settings_client->overlay_button->disable_copy_id = ini.GetBoolValue("overlay::button", "disable_copy_id", settings_client->overlay_button->disable_copy_id);
+    settings_server->overlay_button->disable_copy_id = ini.GetBoolValue("overlay::button", "disable_copy_id", settings_client->overlay_button->disable_copy_id);
+
+    settings_client->overlay_button->disable_test_achievement = ini.GetBoolValue("overlay::button", "disable_test_achievement", settings_client->overlay_button->disable_test_achievement);
+    settings_server->overlay_button->disable_test_achievement = ini.GetBoolValue("overlay::button", "disable_test_achievement", settings_client->overlay_button->disable_test_achievement);
+
+}
+
 template<typename Out>
 static void split_string(const std::string &s, char delim, Out result) {
     std::stringstream ss(s);
@@ -1583,6 +1600,7 @@ uint32 create_localstorage_settings(Settings **settings_client_out, Settings **s
 
     parse_overlay_general_config(settings_client, settings_server);
     load_overlay_appearance(settings_client, settings_server, local_storage);
+    load_overlay_button(settings_client, settings_server, local_storage);
 
     *settings_client_out = settings_client;
     *settings_server_out = settings_server;

@@ -107,6 +107,13 @@ struct Group_Clans {
     std::string tag{};
 };
 
+struct Overlay_Button {
+    bool disable_show_achievements = false;
+    bool disable_settings = false;
+    bool disable_copy_id = false;
+    bool disable_test_achievement = false;
+}
+
 struct Overlay_Appearance {
     enum NotificationPosition {
         top_left, top_center, top_right,
@@ -283,6 +290,8 @@ public:
     bool auto_accept_any_overlay_invites = false;
     // list of user steam IDs to auto-accept invites from
     std::set<uint64_t> auto_accept_overlay_invites_friends{};
+    // Overlay button settings.
+    Overlay_Button overlay_button{};
 
 
 #ifdef LOBBY_CONNECT
